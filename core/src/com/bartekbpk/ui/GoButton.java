@@ -3,6 +3,7 @@ package com.bartekbpk.ui;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.bartekbpk.game.Arkanoid;
+import com.bartekbpk.screens.AbstractScreen;
 
 /**
  * Created by Bartlomiej Kulesa on 21.07.17.
@@ -10,8 +11,8 @@ import com.bartekbpk.game.Arkanoid;
 
 public class GoButton extends AbstractLhRhButton {
 
-    private final static float X = Arkanoid.WIDTH - Arkanoid.MARGIN - WIDTH;
-    private final static float Y = Arkanoid.MARGIN * 2 + HEIGHT;
+    private final static float X = Arkanoid.WIDTH - AbstractScreen.MARGIN - WIDTH;
+    private final static float Y = AbstractScreen.MARGIN * 2 + HEIGHT;
 
     public GoButton(final IClickCallback callback) {
         super(X, Y);

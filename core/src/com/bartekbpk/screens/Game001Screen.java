@@ -1,38 +1,13 @@
 package com.bartekbpk.screens;
 
 import com.badlogic.gdx.Gdx;
-import com.bartekbpk.entities.Ball;
-import com.bartekbpk.entities.PlayerPaddle;
 import com.bartekbpk.game.Arkanoid;
-import com.bartekbpk.ui.GoButton;
-import com.bartekbpk.ui.IClickCallback;
-import com.bartekbpk.ui.Column;
-import com.bartekbpk.ui.LhRhButton;
 
 /**
  * Created by Bartlomiej Kulesa on 18.07.17.
  */
 
 public class Game001Screen extends AbstractScreen {
-
-    private boolean go; // Game run
-
-    private float stepBallX;
-    private float stepBallY;
-
-    private float speedPaddle;
-    private final static float minPaddleX = 150;
-    private float maxPaddleX;
-
-    private Column leftColumn;
-    private Column rightColumn;
-    private Column topColumn;
-
-    private PlayerPaddle playerPaddle;
-    private Ball ball;
-    private LhRhButton leftButton;
-    private LhRhButton rightButton;
-    private GoButton goButton;
 
     public Game001Screen(Arkanoid game) {
         super(game);
@@ -41,41 +16,7 @@ public class Game001Screen extends AbstractScreen {
     }
 
     private void initial() {
-        stepBallX = 100;
-        stepBallY = 100;
-
-        speedPaddle = 200;
-        go = false;
-
-        playerPaddle = new PlayerPaddle();
-        stage.addActor(playerPaddle);
-        maxPaddleX = Arkanoid.WIDTH - 150 - playerPaddle.getWidth();
-
-        leftColumn = new Column("splachScreen.png", 150, 540, 0,0);
-        stage.addActor(leftColumn);
-
-        rightColumn = new Column("splachScreen.png", 150, 540, 810,0);
-        stage.addActor(rightColumn);
-
-        topColumn = new Column("splachScreen.png", 660, 20, 150, 520);
-        stage.addActor(topColumn);
-
-        ball = new Ball(playerPaddle.getHeight() + playerPaddle.getY());
-        stage.addActor(ball);
-
-        leftButton = new LhRhButton(1 + Arkanoid.MARGIN, Arkanoid.MARGIN);
-        stage.addActor(leftButton);
-
-        rightButton = new LhRhButton(Arkanoid.WIDTH - 100 - Arkanoid.MARGIN, Arkanoid.MARGIN);
-        stage.addActor(rightButton);
-
-        goButton = new GoButton(new IClickCallback() {
-            @Override
-            public void onClick() {
-                go = true;
-            }
-        });
-        stage.addActor(goButton);
+        initialBasicObject();
     }
 
     @Override

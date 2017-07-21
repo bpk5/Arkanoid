@@ -10,8 +10,6 @@ public class Arkanoid extends Game {
 	public final static int WIDTH = 960;
 	public final static int HEIGHT = 540;
 
-	public final static float MARGIN = 20;
-
 	private boolean paused;
 
 	@Override

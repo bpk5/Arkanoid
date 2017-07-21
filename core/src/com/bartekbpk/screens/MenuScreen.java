@@ -46,19 +46,9 @@ public class MenuScreen extends AbstractScreen {
     @Override
     public void render(float delta) {
         super.render(delta);
-        update();
 
         spriteBatch.begin();
         stage.draw();
         spriteBatch.end();
-    }
-
-    private void update() {
-
-    }
-
-    @Override
-    public void dispose() {
-        super.dispose();
     }
 }
