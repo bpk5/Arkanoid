@@ -13,10 +13,8 @@ public class Column extends Image {
 
     private Rectangle rectangle;
 
-    public Column(String texture, float width, float height, float x, float y) {
-        super(new Texture(texture));
-//        this.height = texture.getHeight();
-//        this.width = texture.getWidth();
+    public Column(Texture texture, float width, float height, float x, float y) {
+        super(texture);
         this.setSize(width, height);
 
         this.setPosition(x, y);

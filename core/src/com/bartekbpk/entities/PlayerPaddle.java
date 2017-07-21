@@ -19,8 +19,8 @@ public class PlayerPaddle extends Image {
 
     private Rectangle rectangle;
 
-    public PlayerPaddle() {
-        super(new Texture("paddle.png"));
+    public PlayerPaddle(Texture texture) {
+        super(texture);
 
         this.setOrigin(WIDTH / 2, HEIGHT / 2);
         this.setSize(WIDTH, HEIGHT);
@@ -37,7 +37,7 @@ public class PlayerPaddle extends Image {
         return rectangle;
     }
 
-    public void setRectangle(Rectangle rectangle) {
-        this.rectangle = rectangle;
+    public void updateRectangle() {
+        rectangle.setPosition(this.getX(), this.getY());
     }
 }

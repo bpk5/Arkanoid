@@ -8,6 +8,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
@@ -25,36 +26,39 @@ import com.bartekbpk.ui.LhRhButton;
  */
 public abstract class AbstractScreen implements Screen {
 
-    protected PlayerPaddle playerPaddle;
+    public final static float MARGIN = 20;
+    protected final static float minPaddleX = 150;
 
+    protected PlayerPaddle playerPaddle;
     protected Column leftColumn;
+
     protected Column rightColumn;
     protected Column topColumn;
-
     protected Ball ball;
     protected LhRhButton leftButton;
+
     protected LhRhButton rightButton;
+
     protected GoButton goButton;
 
     protected boolean go; // Game run
-
     protected float stepBallX;
     protected float stepBallY;
 
     protected float speedPaddle;
-
-    protected final static float minPaddleX = 150;
     protected float maxPaddleX;
-
 
     protected Arkanoid game;
 
-    public final static float MARGIN = 20;
-
     protected Stage stage; // Scenes for actors.
     private OrthographicCamera camera;
-
     protected SpriteBatch spriteBatch;
+
+    private Texture leftColumnTexture;
+    private Texture rightColumnTexture;
+    private Texture topColumnTexture;
+    private Texture ballTexture;
+    private Texture paddleTexture;
 
     public AbstractScreen(Arkanoid game) {
         this.game = game;
@@ -78,20 +82,23 @@ public abstract class AbstractScreen implements Screen {
     }
 
     protected void initialBasicObject() {
-        playerPaddle = new PlayerPaddle();
+
+        loadImage();
+
+        playerPaddle = new PlayerPaddle(paddleTexture);
         stage.addActor(playerPaddle);
         maxPaddleX = Arkanoid.WIDTH - 150 - playerPaddle.getWidth();
 
-        leftColumn = new Column("splachScreen.png", 150, 540, 0,0);
+        leftColumn = new Column(leftColumnTexture, 150, 540, 0,0);
         stage.addActor(leftColumn);
 
-        rightColumn = new Column("splachScreen.png", 150, 540, 810,0);
+        rightColumn = new Column(rightColumnTexture, 150, 540, 810,0);
         stage.addActor(rightColumn);
 
-        topColumn = new Column("splachScreen.png", 660, 20, 150, 520);
+        topColumn = new Column(topColumnTexture, 660, 20, 150, 520);
         stage.addActor(topColumn);
 
-        ball = new Ball(playerPaddle.getHeight() + playerPaddle.getY());
+        ball = new Ball(ballTexture, playerPaddle.getHeight() + playerPaddle.getY());
         stage.addActor(ball);
 
         leftButton = new LhRhButton(1 + MARGIN, MARGIN);
@@ -107,6 +114,60 @@ public abstract class AbstractScreen implements Screen {
             }
         });
         stage.addActor(goButton);
+    }
+
+    private void loadImage() {
+        leftColumnTexture = new Texture("splachScreen.png");
+        rightColumnTexture = new Texture("splachScreen.png");
+        topColumnTexture = new Texture("splachScreen.png");
+        ballTexture = new Texture("ball.png");
+        paddleTexture = new Texture("paddle.png");
+    }
+
+    protected void collisionDetectionWall() {
+        if (ball.getRectangle().overlaps(leftColumn.getRectangle())) {
+            stepBallX = -stepBallX;
+        }
+
+        if (ball.getRectangle().overlaps(rightColumn.getRectangle())) {
+            stepBallX = -stepBallX;
+        }
+
+        if (ball.getRectangle().overlaps(topColumn.getRectangle())) {
+            stepBallY = -stepBallY;
+        }
+    }
+
+    protected void runBall(float delta) {
+        if (!go) {
+            ball.setX(playerPaddle.getX() + playerPaddle.getWidth() / 2 - ball.getWidth() / 2);
+            ball.updateRectangle();
+        } else {
+            ball.moveBy(stepBallX * delta, stepBallY * delta);
+            ball.updateRectangle();
+        }
+    }
+
+    protected void touchedLeftRight(float delta) {
+
+        int touchX = Gdx.input.getX();
+        int touchY = Arkanoid.HEIGHT - Gdx.input.getY();
+
+        if ((touchX < (leftButton.getX() + leftButton.getWidth())) &&
+                (touchY < (leftButton.getY() + leftButton.getHeight())) &&
+                (playerPaddle.getX() > minPaddleX)) {
+
+            playerPaddle.moveBy(-speedPaddle * delta, 0);
+            playerPaddle.updateRectangle();
+        }
+
+        if ((touchX > rightButton.getX()) &&
+                (touchY < (rightButton.getY() + rightButton.getHeight())) &&
+                (playerPaddle.getX() < maxPaddleX)) {
+
+            playerPaddle.moveBy(speedPaddle * delta, 0);
+            playerPaddle.updateRectangle();
+        }
     }
 
     @Override

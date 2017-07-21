@@ -1,5 +1,6 @@
 package com.bartekbpk.entities;
 
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -16,8 +17,8 @@ public class Ball extends Image {
     private final static int WIDTH = 10;
 
     private final static int HEIGHT = 10;
-    public Ball(float y) {
-        super(new Texture("ball.png"));
+    public Ball(Texture texture, float y) {
+        super(texture);
 
         this.setOrigin(WIDTH / 2, HEIGHT / 2);
         this.setSize(WIDTH, HEIGHT);
