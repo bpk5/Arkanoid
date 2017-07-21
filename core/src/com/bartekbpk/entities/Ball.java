@@ -1,6 +1,7 @@
 package com.bartekbpk.entities;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.bartekbpk.game.Arkanoid;
 
@@ -10,9 +11,11 @@ import com.bartekbpk.game.Arkanoid;
 
 public class Ball extends Image {
 
-    private final static int WIDTH = 10;
-    private final static int HEIGHT = 10;
+    private Rectangle rectangle;
 
+    private final static int WIDTH = 10;
+
+    private final static int HEIGHT = 10;
     public Ball(float y) {
         super(new Texture("ball.png"));
 
@@ -20,5 +23,18 @@ public class Ball extends Image {
         this.setSize(WIDTH, HEIGHT);
 
         this.setPosition((Arkanoid.WIDTH / 2) - (WIDTH / 2), y);
+
+        rectangle = new Rectangle();
+        updateRectangle();
+        rectangle.setWidth(WIDTH);
+        rectangle.setHeight(HEIGHT);
+    }
+
+    public Rectangle getRectangle() {
+        return rectangle;
+    }
+
+    public void updateRectangle() {
+        rectangle.setPosition(this.getX(), this.getY());
     }
 }

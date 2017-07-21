@@ -37,7 +37,6 @@ public class MenuScreen extends AbstractScreen {
         exitButton = new ExitButton(new IClickCallback() {
             @Override
             public void onClick() {
-                dispose();
                 Gdx.app.exit();
             }
         });

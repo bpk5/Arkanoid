@@ -1,6 +1,7 @@
 package com.bartekbpk.entities;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.bartekbpk.game.Arkanoid;
 
@@ -16,6 +17,8 @@ public class PlayerPaddle extends Image {
     private final static int STARTING_X = (Arkanoid.WIDTH / 2) - (WIDTH / 2);
     private final static int STARTING_Y = 50;
 
+    private Rectangle rectangle;
+
     public PlayerPaddle() {
         super(new Texture("paddle.png"));
 
@@ -23,5 +26,18 @@ public class PlayerPaddle extends Image {
         this.setSize(WIDTH, HEIGHT);
 
         this.setPosition(STARTING_X, STARTING_Y);
+
+        rectangle = new Rectangle();
+        rectangle.setPosition(STARTING_X, STARTING_Y);
+        rectangle.setWidth(WIDTH);
+        rectangle.setHeight(HEIGHT);
+    }
+
+    public Rectangle getRectangle() {
+        return rectangle;
+    }
+
+    public void setRectangle(Rectangle rectangle) {
+        this.rectangle = rectangle;
     }
 }

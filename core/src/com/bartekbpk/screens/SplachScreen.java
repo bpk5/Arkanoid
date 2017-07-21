@@ -23,7 +23,7 @@ public class SplachScreen extends AbstractScreen {
             public void run() {
                 game.setScreen(new MenuScreen(game));
             }
-        }, 3);
+        }, 1);
     }
 
     private void initial() {
