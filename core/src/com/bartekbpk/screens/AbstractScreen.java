@@ -60,11 +60,13 @@ public abstract class AbstractScreen implements Screen {
 
     @Override
     public void resume() {
+        System.out.println("resume");
         game.setPaused(false);
     }
 
     @Override
     public void pause() {
+        System.out.println("pause");
         game.setPaused(true);
     }
 
@@ -75,11 +77,12 @@ public abstract class AbstractScreen implements Screen {
 
     @Override
     public void resize(int width, int height) {
-
+        System.out.println("resize");
     }
 
     @Override
     public void dispose() {
+        System.out.println("dispose");
         game.dispose();
     }
 }

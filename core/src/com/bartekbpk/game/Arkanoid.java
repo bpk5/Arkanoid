@@ -7,8 +7,8 @@ public class Arkanoid extends Game {
 
 	public final static String GAME_NAME = "Arkanoid";
 
-	public final static int WIDTH = 480;
-	public final static int HEIGHT = 700;
+	public final static int WIDTH = 960;
+	public final static int HEIGHT = 540;
 
 	private boolean paused;
 

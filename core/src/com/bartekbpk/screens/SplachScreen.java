@@ -21,14 +21,13 @@ public class SplachScreen extends AbstractScreen {
         Timer.schedule(new Timer.Task() {
             @Override
             public void run() {
-                System.out.println("menu");
                 game.setScreen(new MenuScreen(game));
             }
         }, 3);
     }
 
     private void initial() {
-        splashImg = new Texture("badlogic.jpg");
+        splashImg = new Texture("splachScreen.png");
     }
 
     @Override
