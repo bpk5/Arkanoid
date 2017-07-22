@@ -23,11 +23,11 @@ public class SplachScreen extends AbstractScreen {
             public void run() {
                 game.setScreen(new MenuScreen(game));
             }
-        }, 1);
+        }, 2);
     }
 
     private void initial() {
-        splashImg = new Texture("splachScreen.png");
+        splashImg = new Texture("bgdSplach.png");
     }
 
     @Override

@@ -116,7 +116,7 @@ public abstract class AbstractScreen implements Screen {
         stage.addActor(goButton);
     }
 
-    private void loadImage() {
+    protected void loadImage() {
         leftColumnTexture = new Texture("splachScreen.png");
         rightColumnTexture = new Texture("splachScreen.png");
         topColumnTexture = new Texture("splachScreen.png");
